@@ -1,0 +1,101 @@
+{
+  "name": "tfidf_lr_cleaned",
+  "model": "TF-IDF + Logistic Regression",
+  "data_dir": "data/processed_cleaned",
+  "seed": 42,
+  "params": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_features": 200000,
+    "C": 100,
+    "n_features": 200000
+  },
+  "sizes": {
+    "train": 27037,
+    "val": 5794,
+    "test": 5794
+  },
+  "val": {
+    "accuracy": 0.9917155678287884,
+    "precision": 0.9946050096339114,
+    "recall": 0.9869980879541109,
+    "f1": 0.9907869481765835,
+    "auroc": 0.9992539472410062,
+    "confusion_matrix": [
+      [
+        3165,
+        14
+      ],
+      [
+        34,
+        2581
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.9932688988608905,
+    "precision": 0.9950038431975403,
+    "recall": 0.990057361376673,
+    "f1": 0.99252443933295,
+    "auroc": 0.9996547611386146,
+    "confusion_matrix": [
+      [
+        3166,
+        13
+      ],
+      [
+        26,
+        2589
+      ]
+    ]
+  },
+  "train_seconds": 24.967693800106645,
+  "infer_ms_per_1000_docs": 843.1157403589222,
+  "top_features_fake": [
+    "via",
+    "video",
+    "read more",
+    "read",
+    "president trump",
+    "just",
+    "featured image",
+    "image",
+    "featured",
+    "gop",
+    "this",
+    "breaking",
+    "obama",
+    "the us",
+    "us",
+    "watch",
+    "image via",
+    "mr",
+    "hillary",
+    "america"
+  ],
+  "top_features_real": [
+    "said",
+    "said on",
+    "washington",
+    "on tuesday",
+    "on wednesday",
+    "president donald",
+    "on",
+    "on thursday",
+    "said in",
+    "on friday",
+    "on monday",
+    "republican",
+    "said the",
+    "he said",
+    "tuesday",
+    "nov",
+    "washington the",
+    "wednesday",
+    "washington president",
+    "president barack"
+  ]
+}

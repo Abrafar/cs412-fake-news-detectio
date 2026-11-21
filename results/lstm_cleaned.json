@@ -1,0 +1,88 @@
+{
+  "name": "lstm_cleaned",
+  "model": "BiLSTM",
+  "data_dir": "data/processed_cleaned",
+  "seed": 42,
+  "params": {
+    "cell": "lstm",
+    "epochs": 4,
+    "batch-size": 64,
+    "max-len": 300,
+    "vocab-size": 30000,
+    "embed-dim": 128,
+    "hidden": 128,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "train-subset": 0
+  },
+  "sizes": {
+    "train": 27037,
+    "val": 5794,
+    "test": 5794
+  },
+  "val": {
+    "accuracy": 0.9879185364169831,
+    "precision": 0.9911231184870706,
+    "recall": 0.9820267686424474,
+    "f1": 0.9865539761813292,
+    "auroc": 0.9989385408665976,
+    "confusion_matrix": [
+      [
+        3156,
+        23
+      ],
+      [
+        47,
+        2568
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.9880911287538833,
+    "precision": 0.9869931140015302,
+    "recall": 0.9866156787762906,
+    "f1": 0.9868043602983362,
+    "auroc": 0.9990265948200939,
+    "confusion_matrix": [
+      [
+        3145,
+        34
+      ],
+      [
+        35,
+        2580
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.23682606509786547,
+      "val_f1": 0.9692070823710547,
+      "val_accuracy": 0.9723852260959613
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.07731905017569912,
+      "val_f1": 0.9800153727901614,
+      "val_accuracy": 0.9820503969623748
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.04909545708004441,
+      "val_f1": 0.9802172226532195,
+      "val_accuracy": 0.9823955816361754
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.035695443785964565,
+      "val_f1": 0.9865539761813292,
+      "val_accuracy": 0.9879185364169831
+    }
+  ],
+  "train_seconds": 25.70199880003929,
+  "infer_ms_per_1000_docs": 88.5912322644678,
+  "device": "cuda",
+  "peak_vram_mb": 386.4990234375,
+  "n_parameters": 4104449
+}

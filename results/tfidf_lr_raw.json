@@ -1,0 +1,101 @@
+{
+  "name": "tfidf_lr_raw",
+  "model": "TF-IDF + Logistic Regression",
+  "data_dir": "data/processed_raw",
+  "seed": 42,
+  "params": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_features": 200000,
+    "C": 100,
+    "n_features": 200000
+  },
+  "sizes": {
+    "train": 27037,
+    "val": 5794,
+    "test": 5794
+  },
+  "val": {
+    "accuracy": 0.9948222298929927,
+    "precision": 0.9961612284069098,
+    "recall": 0.9923518164435946,
+    "f1": 0.9942528735632183,
+    "auroc": 0.9995949758723747,
+    "confusion_matrix": [
+      [
+        3169,
+        10
+      ],
+      [
+        20,
+        2595
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.994994822229893,
+    "precision": 0.9961627014581734,
+    "recall": 0.9927342256214149,
+    "f1": 0.9944455085232714,
+    "auroc": 0.9997908117143035,
+    "confusion_matrix": [
+      [
+        3169,
+        10
+      ],
+      [
+        19,
+        2596
+      ]
+    ]
+  },
+  "train_seconds": 19.956146099604666,
+  "infer_ms_per_1000_docs": 424.9388849684852,
+  "top_features_fake": [
+    "via",
+    "video",
+    "read more",
+    "read",
+    "image",
+    "just",
+    "president trump",
+    "featured image",
+    "featured",
+    "gop",
+    "breaking",
+    "this",
+    "obama",
+    "the us",
+    "us",
+    "watch",
+    "image via",
+    "mr",
+    "hillary",
+    "america"
+  ],
+  "top_features_real": [
+    "reuters",
+    "said",
+    "washington reuters",
+    "said on",
+    "reuters the",
+    "on tuesday",
+    "washington",
+    "on wednesday",
+    "said in",
+    "reuters president",
+    "president donald",
+    "on thursday",
+    "on",
+    "on friday",
+    "on monday",
+    "republican",
+    "said the",
+    "he said",
+    "nov",
+    "tuesday"
+  ]
+}

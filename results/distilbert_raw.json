@@ -1,0 +1,73 @@
+{
+  "name": "distilbert_raw",
+  "model": "DistilBERT (fine-tuned)",
+  "data_dir": "data/processed_raw",
+  "seed": 42,
+  "params": {
+    "model_name": "distilbert-base-uncased",
+    "epochs": 2,
+    "batch_size": 16,
+    "max_len": 256,
+    "lr": 2e-05,
+    "train_subset": 0,
+    "fp16_autocast": true
+  },
+  "sizes": {
+    "train": 27037,
+    "val": 5794,
+    "test": 5794
+  },
+  "val": {
+    "accuracy": 0.9998274076630997,
+    "precision": 0.9996177370030581,
+    "recall": 1.0,
+    "f1": 0.9998088319632957,
+    "auroc": 0.9999997594154276,
+    "confusion_matrix": [
+      [
+        3178,
+        1
+      ],
+      [
+        0,
+        2615
+      ]
+    ]
+  },
+  "test": {
+    "accuracy": 0.9994822229892992,
+    "precision": 0.9992354740061162,
+    "recall": 0.9996175908221797,
+    "f1": 0.9994264958898872,
+    "auroc": 0.9999991579539966,
+    "confusion_matrix": [
+      [
+        3177,
+        2
+      ],
+      [
+        1,
+        2614
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.036388024646433176,
+      "val_f1": 0.9998088319632957,
+      "val_accuracy": 0.9998274076630997
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0011470526876795873,
+      "val_f1": 0.9998088319632957,
+      "val_accuracy": 0.9998274076630997
+    }
+  ],
+  "train_seconds": 379.45592659991235,
+  "infer_ms_per_1000_docs": 1560.7835520168173,
+  "device": "cuda",
+  "peak_vram_mb": 1696.91064453125,
+  "n_parameters": 66955010
+}
