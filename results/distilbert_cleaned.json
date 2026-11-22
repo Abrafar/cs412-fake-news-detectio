@@ -18,56 +18,67 @@
     "test": 5794
   },
   "val": {
-    "accuracy": 1.0,
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "auroc": 0.9999999999999999,
+    "accuracy": 0.9986192613047981,
+    "precision": 0.9980894153611005,
+    "recall": 0.9988527724665393,
+    "f1": 0.9984709480122325,
+    "auroc": 0.9999903766171043,
     "confusion_matrix": [
       [
-        3179,
-        0
+        3174,
+        5
       ],
       [
-        0,
-        2615
+        3,
+        2612
       ]
     ]
   },
   "test": {
-    "accuracy": 0.9996548153261995,
-    "precision": 0.9996175908221797,
-    "recall": 0.9996175908221797,
-    "f1": 0.9996175908221797,
-    "auroc": 0.9999989173694243,
+    "accuracy": 0.9982740766309975,
+    "precision": 0.9980879541108987,
+    "recall": 0.9980879541108987,
+    "f1": 0.9980879541108987,
+    "auroc": 0.9999927824628281,
     "confusion_matrix": [
       [
-        3178,
-        1
+        3174,
+        5
       ],
       [
-        1,
-        2614
+        5,
+        2610
       ]
     ]
   },
   "history": [
     {
       "epoch": 1,
-      "train_loss": 0.0440858836295163,
-      "val_f1": 1.0,
-      "val_accuracy": 1.0
+      "train_loss": 0.06148084329818712,
+      "val_f1": 0.9977029096477795,
+      "val_accuracy": 0.9979288919571971
     },
     {
       "epoch": 2,
-      "train_loss": 0.000724472330090852,
-      "val_f1": 1.0,
-      "val_accuracy": 1.0
+      "train_loss": 0.0042792448001229685,
+      "val_f1": 0.9984709480122325,
+      "val_accuracy": 0.9986192613047981
     }
   ],
-  "train_seconds": 795.3112115999684,
-  "infer_ms_per_1000_docs": 1497.811408283322,
+  "best_epoch": 2,
+  "train_seconds": 375.8791819997132,
+  "infer_ms_per_1000_docs": 1977.1336554686263,
+  "infer_includes_tokenization": true,
   "device": "cuda",
   "peak_vram_mb": 1696.91064453125,
-  "n_parameters": 66955010
+  "n_parameters": 66955010,
+  "versions": {
+    "python": "3.12.0",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0+cu132",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "transformers": "5.24.0"
+  }
 }

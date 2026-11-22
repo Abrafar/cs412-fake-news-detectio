@@ -1,9 +1,11 @@
 import json
+import platform
 import random
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import sklearn
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_recall_fscore_support, roc_auc_score
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -46,10 +48,29 @@ def compute_metrics(y_true, y_score, threshold=0.5):
     }
 
 
+# Library and hardware versions, for the report.
+def versions():
+    out = {"python": platform.python_version(), "numpy": np.__version__, "pandas": pd.__version__, "scikit-learn": sklearn.__version__}
+    try:
+        import torch
+        out["torch"] = torch.__version__
+        if torch.cuda.is_available():
+            out["gpu"] = torch.cuda.get_device_name(0)
+    except ImportError:
+        pass
+    try:
+        import transformers
+        out["transformers"] = transformers.__version__
+    except ImportError:
+        pass
+    return out
+
+
 # Write a result dictionary to results/<name>.json.
 def save_result(name, result):
     folder = ROOT / "results"
     folder.mkdir(exist_ok=True)
+    result["versions"] = versions()
     path = folder / f"{name}.json"
     path.write_text(json.dumps(result, indent=2))
     print(f"saved {path}")

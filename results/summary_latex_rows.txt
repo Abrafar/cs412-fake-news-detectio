@@ -1,6 +1,6 @@
-TF-IDF + Logistic Regression & cleaned & 0.993 & 0.995 & 0.990 & 0.993 & 1.000 & 25 \\
-TF-IDF + Logistic Regression & raw & 0.995 & 0.996 & 0.993 & 0.994 & 1.000 & 20 \\
-BiLSTM & cleaned & 0.988 & 0.987 & 0.987 & 0.987 & 0.999 & 26 \\
-BiLSTM & raw & 0.998 & 0.997 & 0.998 & 0.998 & 1.000 & 26 \\
-DistilBERT (fine-tuned) & cleaned & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 795 \\
-DistilBERT (fine-tuned) & raw & 0.999 & 0.999 & 1.000 & 0.999 & 1.000 & 379 \\
+TF-IDF + Logistic Regression & cleaned & 0.994 & 0.996 & 0.991 & 0.993 & 1.000 & 21 \\
+TF-IDF + Logistic Regression & raw & 0.996 & 0.997 & 0.994 & 0.995 & 1.000 & 21 \\
+BiLSTM & cleaned & 0.986 & 0.994 & 0.974 & 0.984 & 0.999 & 26 \\
+BiLSTM & raw & 0.998 & 0.997 & 0.998 & 0.998 & 1.000 & 27 \\
+DistilBERT (fine-tuned) & cleaned & 0.998 & 0.998 & 0.998 & 0.998 & 1.000 & 376 \\
+DistilBERT (fine-tuned) & raw & 1.000 & 0.999 & 1.000 & 1.000 & 1.000 & 378 \\

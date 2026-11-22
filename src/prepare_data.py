@@ -7,14 +7,19 @@ from sklearn.model_selection import train_test_split
 
 from common import ROOT, SEED
 
-DATELINE = re.compile(r"^\s*(?:[A-Za-z][A-Za-z.,'/&\- ]{0,60}\s)?\(\s*reuters\s*\)\s*[-–—:]?\s*", re.IGNORECASE)
-SOURCE_WORD = re.compile(r"\breuters\b", re.IGNORECASE)
+STRICT_DATELINE = re.compile(r"^\s*(?:[A-Za-z][A-Za-z.,'/&\- ]{0,60}\s)?\(\s*reuters\s*\)\s*[-–—:]?\s*", re.IGNORECASE)
+LEADING_TAG = re.compile(r"^.{0,200}?\(\s*reuters\s*\)\s*[-–—:]?\s*", re.IGNORECASE | re.DOTALL)
+SOURCE_NAME = re.compile(r"reuters", re.IGNORECASE)
 
 
-# Remove the news-agency dateline and any remaining source name.
-def strip_source_cues(text):
-    text = DATELINE.sub("", text, count=1)
-    return SOURCE_WORD.sub(" ", text)
+# Remove everything up to and including a "(Reuters)" tag near the start of a body.
+def strip_dateline(body):
+    return LEADING_TAG.sub("", body, count=1)
+
+
+# Remove every remaining mention of the source name.
+def strip_source_name(text):
+    return SOURCE_NAME.sub(" ", text)
 
 
 # Collapse runs of whitespace.
@@ -39,8 +44,8 @@ def main():
     df["title"] = df["title"].fillna("")
     df["text"] = df["text"].fillna("")
     df["body_chars"] = df["text"].str.strip().str.len()
-    stats["real_with_reuters_dateline"] = int(real["text"].fillna("").str.contains(DATELINE).sum())
-    stats["fake_with_reuters_dateline"] = int(fake["text"].fillna("").str.contains(DATELINE).sum())
+    stats["real_with_reuters_dateline"] = int(real["text"].fillna("").str.contains(STRICT_DATELINE).sum())
+    stats["fake_with_reuters_dateline"] = int(fake["text"].fillna("").str.contains(STRICT_DATELINE).sum())
 
     short = df["body_chars"] < args.min_chars
     stats["dropped_empty_or_short_body"] = int(short.sum())
@@ -64,8 +69,11 @@ def main():
     idx_val, idx_test = train_test_split(idx_rest, test_size=0.50, stratify=df.loc[idx_rest, "label"], random_state=SEED)
     splits = {"train": idx_train, "val": idx_val, "test": idx_test}
 
-    cleaned = df["raw_text"].map(strip_source_cues).map(squash)
+    tagged = df["text"].str.contains(LEADING_TAG)
+    stats["leading_tag_removed"] = {"real": int((tagged & (df.label == 0)).sum()), "fake": int((tagged & (df.label == 1)).sum())}
+    cleaned = (df["title"].map(strip_source_name) + ". " + df["text"].map(strip_dateline).map(strip_source_name)).map(squash)
     stats["cleaned_changed_rows"] = int((cleaned != df["raw_text"]).sum())
+    stats["cleaned_rows_mentioning_reuters"] = int(cleaned.str.contains("reuters", case=False).sum())
     stats["median_words_by_class"] = {
         "real": float(df.loc[df.label == 0, "raw_text"].str.split().str.len().median()),
         "fake": float(df.loc[df.label == 1, "raw_text"].str.split().str.len().median()),

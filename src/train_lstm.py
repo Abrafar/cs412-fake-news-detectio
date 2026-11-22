@@ -89,7 +89,7 @@ def main():
         labels = torch.tensor(df.label.values, dtype=torch.float32)
         return DataLoader(TensorDataset(ids, labels), batch_size=args.batch_size, shuffle=shuffle)
 
-    train_loader, val_loader, test_loader = loader(train, True), loader(val, False), loader(test, False)
+    train_loader, val_loader = loader(train, True), loader(val, False)
 
     model = Classifier(len(vocab) + 2, args.cell, args.embed_dim, args.hidden, args.dropout).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
@@ -97,7 +97,7 @@ def main():
     if device.type == "cuda":
         torch.cuda.reset_peak_memory_stats()
 
-    best_f1, best_state, history = -1.0, None, []
+    best_f1, best_epoch, best_state, history = -1.0, 0, None, []
     start = time.perf_counter()
     for epoch in range(1, args.epochs + 1):
         model.train()
@@ -114,19 +114,19 @@ def main():
         history.append({"epoch": epoch, "train_loss": total / len(train), "val_f1": val_metrics["f1"], "val_accuracy": val_metrics["accuracy"]})
         print(history[-1])
         if val_metrics["f1"] > best_f1:
-            best_f1 = val_metrics["f1"]
+            best_f1, best_epoch = val_metrics["f1"], epoch
             best_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
     train_seconds = time.perf_counter() - start
 
     model.load_state_dict(best_state)
     val_scores = predict(model, val_loader, device)
     start = time.perf_counter()
-    test_scores = predict(model, test_loader, device)
+    test_scores = predict(model, loader(test, False), device)
     infer_ms = (time.perf_counter() - start) * 1000 / len(test) * 1000
 
     result = {
         "name": name,
-        "model": f"BiLSTM" if args.cell == "lstm" else "BiGRU",
+        "model": "BiLSTM" if args.cell == "lstm" else "BiGRU",
         "data_dir": args.data_dir,
         "seed": 42,
         "params": {k: getattr(args, k.replace("-", "_")) for k in ("cell", "epochs", "batch-size", "max-len", "vocab-size", "embed-dim", "hidden", "dropout", "lr", "train-subset")},
@@ -134,8 +134,10 @@ def main():
         "val": compute_metrics(val.label, val_scores),
         "test": compute_metrics(test.label, test_scores),
         "history": history,
+        "best_epoch": best_epoch,
         "train_seconds": train_seconds,
         "infer_ms_per_1000_docs": infer_ms,
+        "infer_includes_tokenization": True,
         "device": device.type,
         "peak_vram_mb": torch.cuda.max_memory_allocated() / 2**20 if device.type == "cuda" else None,
         "n_parameters": sum(p.numel() for p in model.parameters()),

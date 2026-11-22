@@ -80,9 +80,20 @@
       "val_accuracy": 0.9984466689678978
     }
   ],
-  "train_seconds": 26.18049370031804,
-  "infer_ms_per_1000_docs": 88.58966168233515,
+  "best_epoch": 2,
+  "train_seconds": 26.765757800079882,
+  "infer_ms_per_1000_docs": 194.6191405019124,
+  "infer_includes_tokenization": true,
   "device": "cuda",
   "peak_vram_mb": 386.4990234375,
-  "n_parameters": 4104449
+  "n_parameters": 4104449,
+  "versions": {
+    "python": "3.12.0",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0+cu132",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "transformers": "5.24.0"
+  }
 }

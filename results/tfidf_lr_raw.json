@@ -10,8 +10,16 @@
     ],
     "min_df": 2,
     "max_features": 200000,
-    "C": 100,
+    "C": 10000,
     "n_features": 200000
+  },
+  "val_f1_by_C": {
+    "0.1": 0.9641325536062378,
+    "1": 0.9851837598614586,
+    "10": 0.9913677345098791,
+    "100": 0.9942528735632183,
+    "1000": 0.9942528735632183,
+    "10000": 0.9948265951331673
   },
   "sizes": {
     "train": 27037,
@@ -19,32 +27,15 @@
     "test": 5794
   },
   "val": {
-    "accuracy": 0.9948222298929927,
-    "precision": 0.9961612284069098,
-    "recall": 0.9923518164435946,
-    "f1": 0.9942528735632183,
-    "auroc": 0.9995949758723747,
-    "confusion_matrix": [
-      [
-        3169,
-        10
-      ],
-      [
-        20,
-        2595
-      ]
-    ]
-  },
-  "test": {
-    "accuracy": 0.994994822229893,
-    "precision": 0.9961627014581734,
+    "accuracy": 0.9953400069036935,
+    "precision": 0.9969278033794163,
     "recall": 0.9927342256214149,
-    "f1": 0.9944455085232714,
-    "auroc": 0.9997908117143035,
+    "f1": 0.9948265951331673,
+    "auroc": 0.9997023968839486,
     "confusion_matrix": [
       [
-        3169,
-        10
+        3171,
+        8
       ],
       [
         19,
@@ -52,29 +43,48 @@
       ]
     ]
   },
-  "train_seconds": 19.956146099604666,
-  "infer_ms_per_1000_docs": 424.9388849684852,
+  "test": {
+    "accuracy": 0.9958577839143942,
+    "precision": 0.9969313387034906,
+    "recall": 0.9938814531548757,
+    "f1": 0.9954040597472232,
+    "auroc": 0.9998447026585197,
+    "confusion_matrix": [
+      [
+        3171,
+        8
+      ],
+      [
+        16,
+        2599
+      ]
+    ]
+  },
+  "train_seconds": 21.16198670025915,
+  "infer_ms_per_1000_docs": 457.62580253947675,
+  "infer_includes_tokenization": true,
+  "n_parameters": 200001,
   "top_features_fake": [
     "via",
     "video",
     "read more",
     "read",
-    "image",
-    "just",
     "president trump",
     "featured image",
-    "featured",
-    "gop",
+    "just",
+    "image",
     "breaking",
-    "this",
+    "gop",
+    "featured",
     "obama",
     "the us",
+    "this",
     "us",
     "watch",
     "image via",
     "mr",
-    "hillary",
-    "america"
+    "sen",
+    "hillary"
   ],
   "top_features_real": [
     "reuters",
@@ -85,17 +95,26 @@
     "on tuesday",
     "washington",
     "on wednesday",
-    "said in",
     "reuters president",
+    "said in",
     "president donald",
     "on thursday",
     "on",
     "on friday",
     "on monday",
     "republican",
-    "said the",
     "he said",
     "nov",
-    "tuesday"
-  ]
+    "said the",
+    "york reuters"
+  ],
+  "versions": {
+    "python": "3.12.0",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0+cu132",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "transformers": "5.24.0"
+  }
 }
