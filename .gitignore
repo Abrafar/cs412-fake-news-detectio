@@ -226,3 +226,5 @@ data/
 models/
 hf_cache/
 results/*.pt
+
+.vscode/
